@@ -1,0 +1,12 @@
+services:
+  pinnacle:
+    image: ghcr.io/bnyawallow/pinnacle:latest
+    container_name: pinnacle
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pinnacle.rule=Host(`pinnacle.creativefringe.digital`)
+      - traefik.http.routers.pinnacle.entrypoints=websecure
+      - traefik.http.routers.pinnacle.tls=true
+      - traefik.http.routers.pinnacle.tls.certresolver=letsencrypt
+      - traefik.http.services.pinnacle.loadbalancer.server.port=80
